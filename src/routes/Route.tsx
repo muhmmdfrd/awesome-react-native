@@ -1,11 +1,54 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { GetStarted, LoginPage, SplashPage } from '../pages';
-import RegisterPage from '../pages/RegisterPage';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { 
+  GetStarted, 
+  LoginPage, 
+  SplashPage, 
+  UploadPhotoPage,
+  RegisterPage, 
+  DoctorPage, 
+  MessagePage, 
+  HospitalPage 
+} from '../pages';
 import { IRoutes } from '../types/IRoutes';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTab } from '../components';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
+const mainRoutes: IRoutes[] = [
+  {
+    name: 'Doctor',
+    component: DoctorPage
+  },
+  {
+    name: 'Messages',
+    component: MessagePage
+  },
+  {
+    name: 'Hospitals',
+    component: HospitalPage
+  }
+];
+
+const MainRoute: React.FC = () => {
+  return (
+    <Tab.Navigator tabBar={props => <BottomTab {...props} />}>
+      {
+        mainRoutes.map((v, i) => 
+        <Tab.Screen
+          key={i}
+          name={v.name}
+          component={v.component}
+          options={{headerShown: false}}
+        />)
+      }
+    </Tab.Navigator>
+  )
+}
+
+// This route for stack navigator
 // first index first position
 // of routing
 const routes: IRoutes[] = [
@@ -24,12 +67,20 @@ const routes: IRoutes[] = [
   {
     name: 'register',
     component: RegisterPage
+  },
+  {
+    name: 'upload-photo',
+    component: UploadPhotoPage
+  },
+  {
+    name: 'main-app',
+    component: MainRoute
   }
-]
+];
 
 const Route: React.FC = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName={'Splash'}>
       {
         routes.map((v, i) => 
           <Stack.Screen 
@@ -42,5 +93,5 @@ const Route: React.FC = () => {
     </Stack.Navigator>
   );
 }
- 
+
 export default Route;

@@ -1,43 +1,60 @@
-import { Box, Button, Center, Text, TextField } from 'native-base';
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Box, Button, Center, KeyboardAvoidingView, ScrollView, Text } from 'native-base';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { IlustrationLogo } from '../assets';
 import { SizeBox } from '../components';
+import InputText from '../components/InputText';
+import TextLink from '../components/TextLink';
+import { INavProps } from '../types/INavProps';
+import { Theme } from '../utils';
  
-const LoginPage: React.FC = () => {
+const LoginPage: React.FC<INavProps> = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isKeyboardShown, setKeyboardStatus] = useState(false);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => setKeyboardStatus(true));
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => setKeyboardStatus(false));
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   return (
-    <Box style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Box>
-        <IlustrationLogo />
+        {isKeyboardShown ? null : <IlustrationLogo />}
         <Text style={styles.desc}>Masuk dan mulai berkonsultasi</Text>
       </Box>
       
       {/* form group */}
-      <Box>
-        <Text style={styles.label}>Email Address</Text>
-        <SizeBox height={6} />
-        <TextField style={styles.input} type={'email'} onChangeText={(value) => setUsername(value)} />
-        <SizeBox height={24} />
-        <Text style={styles.label}>Password</Text>
-        <SizeBox height={6} />
-        <TextField style={styles.input} secureTextEntry={true} onChangeText={(value) => setPassword(value)} />
+      <Box style={styles.formGroup}>
+        <InputText label='Email Address' type='email' value={username} onChange={(e: string) => setUsername(e)} />
+        <InputText label='Password' type='password' value={password} onChange={(e: string) => setPassword(e)} />
         <Text style={styles.note}>Forgot Password</Text>
       </Box>
 
       {/* submit */}
       <Box>
-        <Button onPress={() => console.log({ username, password })}>Sign In</Button>
+        <Button onPress={() => navigation.replace('main-app')}>Sign In</Button>
         <SizeBox height={30} />
         <Center>
-          <Text style={styles.label}>Create New Account</Text>
+          <TouchableWithoutFeedback onPress={() => console.log('pres') }>
+            <TextLink text={'Create New Account'} />
+          </TouchableWithoutFeedback>
         </Center>
       </Box>
-    </Box>
-    );
+    </KeyboardAvoidingView>
+    
+  );
 }
+
+// font theme
+const { regular, semiBold } = Theme.fonts;
+const { black, grey } = Theme.colors;
 
 const styles = StyleSheet.create({
   container: {
@@ -46,28 +63,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   desc: {
-    marginTop: 40,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: semiBold,
     fontSize: 20,
-    color: '#112340',
-    maxWidth: 153
-  },
-  label: {
-    fontFamily: 'Nunito-Regular',
-    fontSize: 16,
-    color: '#7D8797'
+    color: black,
+    maxWidth: 153,
+    marginTop: 10
   },
   note: {
-    fontFamily: 'Nunito-Regular',
+    fontFamily: regular,
     fontSize: 12,
-    color: '#7D8797'
+    color: grey
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#E9E9E9',
-    borderRadius: 10,
-    padding: 12
+  formGroup: {
+    marginTop: 70,
+    marginBottom: 50
   }
-})
+});
  
 export default LoginPage;

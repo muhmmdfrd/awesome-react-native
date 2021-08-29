@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { IlustrationLogo } from '../assets';
 import { INavProps } from '../types/INavProps';
+import { Theme } from '../utils';
 
 const SplashPage: React.FC<INavProps> = ({ navigation }) => {
   useEffect(() => {
@@ -21,6 +22,9 @@ const SplashPage: React.FC<INavProps> = ({ navigation }) => {
   );
 }
 
+const { semiBold } = Theme.fonts;
+const { black } = Theme.colors;
+
 const styles = StyleSheet.create({
   logo: {
     height: 75,
@@ -28,8 +32,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: '#112340',
-    fontFamily: 'Nunito-SemiBold',
+    color: black,
+    fontFamily: semiBold,
     marginTop: 20
   }
 })

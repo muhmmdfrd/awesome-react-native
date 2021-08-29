@@ -4,6 +4,7 @@ import { ImageBackground, StyleSheet } from 'react-native';
 import { IlustrationGetStarted, IlustrationLogo } from '../assets';
 import { SizeBox } from '../components';
 import { INavProps } from '../types/INavProps';
+import { Theme } from '../utils';
  
 const GetStarted: React.FC<INavProps> = ({ navigation }) => {
   return (
@@ -35,6 +36,9 @@ const GetStarted: React.FC<INavProps> = ({ navigation }) => {
   );
 }
  
+const { semiBold } = Theme.fonts;
+const { white, black, green } = Theme.colors;
+
 const styles = StyleSheet.create({
   box: {
     padding: 40,
@@ -43,28 +47,28 @@ const styles = StyleSheet.create({
   },
   desc: {
     fontSize: 28,
-    color: 'white',
+    color: white,
     marginTop: 91,
-    fontFamily: 'Nunito-SemiBold'
+    fontFamily: semiBold
   },
   btnGetStarted: {
-    backgroundColor: '#0BCAD4',
+    backgroundColor: green,
     paddingVertical: 10,
     borderRadius: 10,
   },
   btnSignIn: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: white,
     paddingVertical: 10,
     borderRadius: 10,
   },
   textGetStarted: {
-    color: 'white',
-    fontFamily: 'Nunito-SemiBold',
+    color: white,
+    fontFamily: semiBold,
     fontSize: 18
   },
   textSignIn: {
-    color: '#112340',
-    fontFamily: 'Nunito-SemiBold',
+    color: black,
+    fontFamily: semiBold,
     fontSize: 18
   }
 })
