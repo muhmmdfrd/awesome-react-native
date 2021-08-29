@@ -1,4 +1,4 @@
-import { Box, Row, ScrollView, Text } from 'native-base';
+import { Box, Row, ScrollView, Text, usePropsResolution } from 'native-base';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { 
@@ -15,9 +15,10 @@ import {
   ThirdNews 
 } from '../assets';
 import { Profile, RatedDoctor, ServiceCard, SizeBox, News } from '../components';
+import { INavProps } from '../types/INavProps';
 import { Theme } from '../utils';
  
-const DoctorPage: React.FC = () => {
+const DoctorPage: React.FC<INavProps> = ({ navigation }) => {
   return(
     <Box style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -37,10 +38,26 @@ const DoctorPage: React.FC = () => {
         >
           <Row>
             <SizeBox width={16} />
-            <ServiceCard name='Dokter Umum' icon={IlustrationGeneralDoctor} />
-            <ServiceCard name='Psikiater' icon={IlustrationPsikater} />
-            <ServiceCard name='Dokter Obat' icon={IlustrationFarmacy} />
-            <ServiceCard name='Dokter Anak' icon={IlustrationChildren} />
+            <ServiceCard 
+              name='Dokter Umum' 
+              icon={IlustrationGeneralDoctor} 
+              onPress={() => navigation.navigate('doctor-category', { name: 'Dokter Umum' })}
+            />
+            <ServiceCard 
+              name='Psikiater' 
+              icon={IlustrationPsikater} 
+              onPress={() => navigation.navigate('doctor-category', { name: 'Psikiater' })}
+            />
+            <ServiceCard 
+              name='Dokter Obat' 
+              icon={IlustrationFarmacy} 
+              onPress={() => navigation.navigate('doctor-category', { name: 'Dokter Obat' })}
+            />
+            <ServiceCard 
+              name='Dokter Anak' 
+              icon={IlustrationChildren} 
+              onPress={() => navigation.navigate('doctor-category', { name: 'Dokter Anak' })}
+            />
           </Row>
         </ScrollView>
         {/* End of category */}

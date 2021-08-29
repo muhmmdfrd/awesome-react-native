@@ -1,23 +1,23 @@
 import { Box, Image, Text } from 'native-base';
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { IlustrationGeneralDoctor } from '../assets';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Theme } from '../utils';
 import SizeBox from './SizeBox';
 
 export interface ServiceCardProps {
   name: string,
-  icon: any
+  icon: any,
+  onPress: any
 }
  
-const ServiceCard: React.FC<ServiceCardProps> = ({ name, icon }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ name, icon, onPress }) => {
   return(
-    <Box style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={icon} style={styles.image} alt='icon of service' />
       <SizeBox height={28} />
       <Text style={styles.preText}>saya butuh</Text>
       <Text style={styles.text}>{ name }</Text>
-    </Box>
+    </TouchableOpacity>
   );
 }
 

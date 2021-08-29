@@ -6,6 +6,8 @@ import RegisterPage from './RegisterPage';
 import DoctorPage from './DoctorPage';
 import HospitalPage from './HospitalPage';
 import MessagePage from './MessagePage';
+import DoctorByCategory from './DoctorByCategory';
+import DoctorProfile from './DoctorProfile';
 
 export { 
     GetStarted, 
@@ -15,5 +17,7 @@ export {
     RegisterPage,
     HospitalPage,
     MessagePage,
-    DoctorPage
+    DoctorPage,
+    DoctorByCategory,
+    DoctorProfile
 };

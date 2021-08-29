@@ -8,7 +8,9 @@ import {
   RegisterPage, 
   DoctorPage, 
   MessagePage, 
-  HospitalPage 
+  HospitalPage,
+  DoctorByCategory,
+  DoctorProfile
 } from '../pages';
 import { IRoutes } from '../types/IRoutes';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -75,6 +77,14 @@ const routes: IRoutes[] = [
   {
     name: 'main-app',
     component: MainRoute
+  },
+  {
+    name: 'doctor-category',
+    component: DoctorByCategory
+  },
+  {
+    name: 'doctor-profile',
+    component: DoctorProfile
   }
 ];
 

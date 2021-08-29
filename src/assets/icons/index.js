@@ -10,6 +10,10 @@ import IconMapActive from './btn_map_active.svg';
 import IconActive from './active.svg';
 import IconStar from './star.svg';
 import IconStarInactive from './star_inactive.svg';
+import IconBackWhite from './back_white.svg';
+import IconChevronRight from './chevron_right.svg';
+import IconFemale from './icon_female.png';
+import IconMale from './icon_male.png';
 
 export { 
     IconBack, 
@@ -23,5 +27,9 @@ export {
     IconMapActive,
     IconActive,
     IconStar,
-    IconStarInactive
+    IconStarInactive,
+    IconBackWhite,
+    IconChevronRight,
+    IconFemale,
+    IconMale
 };

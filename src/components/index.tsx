@@ -9,6 +9,9 @@ import RatedDoctor from './RatedDoctor';
 import News from './News';
 import MessagePreview from './MessagePreview';
 import HospitalList from './HospitalList';
+import HeaderCategory from './HeaderCategory';
+import DoctorCategoryList from './DoctorCategoryList';
+import LabelProfile from './LabelProfile';
 
 export { 
     SizeBox, 
@@ -21,5 +24,8 @@ export {
     News,
     RatedDoctor,
     MessagePreview,
-    HospitalList
+    HospitalList,
+    HeaderCategory,
+    DoctorCategoryList,
+    LabelProfile
 };
