@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import Route from './routes/Route';
 
- const App: React.FC = () => {  
+const App: React.FC = () => { 
    return (
     <NativeBaseProvider>
       <NavigationContainer>

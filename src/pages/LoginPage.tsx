@@ -1,4 +1,4 @@
-import { Box, Button, Center, KeyboardAvoidingView, ScrollView, Text } from 'native-base';
+import { Box, Button, Center, KeyboardAvoidingView, Text } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { IlustrationLogo } from '../assets';
@@ -7,7 +7,10 @@ import InputText from '../components/InputText';
 import TextLink from '../components/TextLink';
 import { INavProps } from '../types/INavProps';
 import { Theme } from '../utils';
- 
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { app } from './../configs' 
+
 const LoginPage: React.FC<INavProps> = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,6 +25,19 @@ const LoginPage: React.FC<INavProps> = ({ navigation }) => {
       hideSubscription.remove();
     };
   }, []);
+
+  const login = () => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, username, password)
+      .then((credential) => {
+        const user = credential.user;
+        console.log(user);
+        navigation.replace('main-app');
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -39,7 +55,7 @@ const LoginPage: React.FC<INavProps> = ({ navigation }) => {
 
       {/* submit */}
       <Box>
-        <Button onPress={() => navigation.replace('main-app')}>Sign In</Button>
+        <Button onPress={() => login()}>Sign In</Button>
         <SizeBox height={30} />
         <Center>
           <TouchableWithoutFeedback onPress={() => console.log('pres') }>
